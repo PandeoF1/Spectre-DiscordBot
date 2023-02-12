@@ -1,0 +1,22 @@
+{
+  "name": "spectre-discordbot",
+  "version": "1.0.0",
+  "description": "Spectre rust team bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PandeoF1/.Spectre-DiscordBot.git"
+  },
+  "author": "PandeoF1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PandeoF1/.Spectre-DiscordBot/issues"
+  },
+  "homepage": "https://github.com/PandeoF1/.Spectre-DiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  }
+}
