@@ -1,14 +1,22 @@
-const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, GatewayIntentBits} = require('discord.js');
 const Config = require('./config/index.js');
 const Commands = require('./commands/index.js');
 
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.DirectMessageTyping,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildMessageTyping,
+        
     ],
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
 
 client.login(Config.discord.token).catch(console.error);
@@ -23,50 +31,29 @@ client.on('ready', async () => {
 
     // Register commands
     console.log('Registering commands : ');
-    const command = await client.application.commands.create(Commands.ping);
-    console.log(`   ${command.name}`);
+    const pingCommand = await client.application.commands.create(Commands.dm.data);
+    console.log(`   ${pingCommand.name}`);
+    const steamIdCommand = await client.application.commands.create(Commands.getSteamID.data);
+    console.log(`   ${steamIdCommand.name}`);
 });
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
 
     if (interaction.commandName === 'dm') {
-        if ((interaction.user.id !== '274847072753025025' && interaction.user.id !== '937656707486736385'))
-        {
-            await interaction.reply({ content: 'You are not authorized to use this command.', ephemeral: true });
-            return;
-        }
+        Commands.dm.execute(interaction);
+    }
+    else if (interaction.commandName === 'getsteamid') {
+        Commands.getSteamID.execute(interaction);
+    }
+});
 
-        let count = 0;
-        let total = 0;
-
-        const members = await interaction.guild.members.fetch();
-
-        const sentEmbed = new EmbedBuilder()
-            .setTitle('Important Message !')
-            .setDescription(interaction.options.getString('message'))
-            .setColor(0x8B0000)
-            .setTimestamp();
-
-        for (const member of members.values()) {
-            total++;
-            if (member.id === '274847072753025025') {
-                try {
-                    await member.send({ embeds: [sentEmbed]});
-                    count++;
-                } catch (error) {
-                    console.log(`Failed to send DM to ${member.user.tag}: ${error}`);
-                }
-
-            }
-        }
-
-        // Create an embed
-        const responseEmbed = new EmbedBuilder()
-            .setTitle('DM')
-            .setDescription(`Sent to ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)
-            .setColor(0x0099FF);
-
-        await interaction.reply({ embeds: [responseEmbed], ephemeral: true });
+client.on('messageCreate', async message => {
+    console.log(`Message from ${message.author.tag}: ${message.content}, ${message.channel.type}`);
+    if (message.partial) return;
+    if (message.author.bot) return;
+    console.log(`Message from ${message.author.tag}: ${message.content}, ${message.channel.type}`);
+    if (message.channel.type === 1) {
+        console.log(`DM from ${message.author.tag}: ${message.content}`);
     }
 });
