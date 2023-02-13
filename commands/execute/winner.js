@@ -15,7 +15,7 @@ async function winner(interaction) {
     // Create an embed
     const messageid = interaction.options.getString('messageid');
     // Get all members from the reaction 🎉 from the message
-    const message = await interaction.channel.messages.fetch(messageid);
+    const message = await interaction.channel.messages.fetch(messageid)
     const reaction = message.reactions.cache.get('🎉');
     const members = await reaction.users.fetch();
 
@@ -25,7 +25,6 @@ async function winner(interaction) {
     }
     // Get a random member
     const member = members.random();
-
 
     // Create an embed
     const responseEmbed = new EmbedBuilder()
