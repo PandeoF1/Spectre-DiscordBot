@@ -9,6 +9,7 @@ const { move } = require('./execute/move.js');
 const { friend } = require('./execute/friend.js');
 const { giveaway } = require('./execute/giveaway.js');
 const { winner } = require('./execute/winner.js');
+const { randomtp } = require('./execute/random.js');
 
 /**
  * @param {import('discord.js').CommandInteraction} interaction
@@ -150,6 +151,19 @@ module.exports = {
 					.setDescription('The message id of the giveaway')),
 		async execute(interaction, client) {
 			winner(interaction);
+		}
+	},
+	randomtp: {
+		data: new SlashCommandBuilder()
+			.setName('randomtp')
+			.setDescription('Teleport to a random player')
+			.addUserOption(option =>
+				option
+					.setName('player')
+					.setRequired(true)
+					.setDescription('The player to teleport to')),
+		async execute(interaction, client) {
+			randomtp(interaction);
 		}
 	},
 };
