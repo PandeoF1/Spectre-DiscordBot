@@ -1,5 +1,5 @@
 version: '3.3'
 services:
-    app:
+    SpectreBot:
         container_name: SpectreBot
-        image: ghcr.io/pandeof1/spectre-discordbot
+        image: ghcr.io/pandeof1/spectre-discordbot:main
