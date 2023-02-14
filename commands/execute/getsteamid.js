@@ -16,6 +16,7 @@ async function getSteamID(interaction) {
 			const steamID64 = message.content.match(/(7656119[0-9]{10})/g);
 			if (steamID64) {
 				// If a steamID64 is found, send all steamID64 found in the message to the variable steamID64
+				
 				for (const steamID of steamID64) {
 					steamID64List.push(`https://steamcommunity.com/profiles/${steamID}`);
 				}
