@@ -22,6 +22,7 @@ async function wipe(interaction) {
 
 	// Create an embed
 	const responseEmbed = new EmbedBuilder()
+		.setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
 		.setTitle('Wipe')
 		.setDescription(`**Server Name:** ${serverName}\n**Server IP:** ${serverIP}\n**Date:** ${date}`)
 		.setColor(0x0099FF);

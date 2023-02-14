@@ -26,6 +26,7 @@ async function getSteamID(interaction) {
 	if (steamID64List.length > 0) {
 		// Create an embed
 		const responseEmbed = new EmbedBuilder()
+        	.setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
 			.setTitle('SteamID64')
 			.setDescription(steamID64List.join('\n'))
 			.setColor(0x0099FF);

@@ -6,5 +6,6 @@ module.exports = {
         clientId: process.env.SBOT_DISCORD_CLIENT_ID || '',
         token: process.env.SBOT_DISCORD_TOKEN || '',
         owners: process.env.SBOT_DISCORD_AUTHORISED_CLIENT_IDS || '',
+        logo: process.env.SBOT_DISCORD_LOGO || '',
     }
 };

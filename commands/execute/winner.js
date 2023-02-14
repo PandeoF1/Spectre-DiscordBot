@@ -28,6 +28,7 @@ async function winner(interaction) {
 
     // Create an embed
     const responseEmbed = new EmbedBuilder()
+        .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
         .setTitle('Winner')
         .setDescription(`The winner is ${member}`)
         .setColor(0x0099FF);

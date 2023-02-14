@@ -30,6 +30,7 @@ async function dm(interaction) {
 	const members = await interaction.guild.members.fetch();
 
 	const sentEmbed = new EmbedBuilder()
+		.setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL()})
 		.setTitle('Important Message !')
 		.setDescription(interaction.options.getString('message'))
 		.setColor(0x8B0000)
@@ -50,6 +51,7 @@ async function dm(interaction) {
 	}
 
 	const responseEmbed = new EmbedBuilder()
+		.setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
 		.setTitle('DM')
 		.setDescription(`Sent to ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)
 		.setColor(0x0099FF);

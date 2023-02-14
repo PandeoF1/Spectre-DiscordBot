@@ -13,6 +13,7 @@ async function giveaway(interaction) {
 		await interaction.reply({ content: 'You are not authorized to use this command.', ephemeral: true });
 		return;
 	}
+
     const title = interaction.options.getString('title');
     const description = interaction.options.getString('description');
     const channel = interaction.options.getChannel('channel');

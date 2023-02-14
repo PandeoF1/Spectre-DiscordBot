@@ -10,6 +10,7 @@ const { friend } = require('./execute/friend.js');
 const { giveaway } = require('./execute/giveaway.js');
 const { winner } = require('./execute/winner.js');
 const { randomtp } = require('./execute/random.js');
+const { helpspectre } = require('./execute/helpspectre.js');
 
 /**
  * @param {import('discord.js').CommandInteraction} interaction
@@ -17,6 +18,14 @@ const { randomtp } = require('./execute/random.js');
  */
 
 module.exports = {
+	helpspectre: {
+		data: new SlashCommandBuilder()
+			.setName('helpspectre')
+			.setDescription('Display all commands for Spectre BOT (/help is for the rust bot)'),
+		async execute(interaction, client, Commands) {
+			helpspectre(interaction, Commands);
+		}
+	},
 	dm: {
 		data: new SlashCommandBuilder()
 			.setName('dm')
@@ -31,7 +40,7 @@ module.exports = {
 					.setName('skipplayerinvoicechannel')
 					.setRequired(true)
 					.setDescription('True if you don\'t want to send the message to all players who are in a voice channel.')),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			dm(interaction);
 		}
 	},
@@ -39,7 +48,7 @@ module.exports = {
 		data: new SlashCommandBuilder()
 			.setName('getsteamid')
 			.setDescription('Get steam profile from steamID64 channel'),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			getSteamID(interaction);
 		}
 	},
@@ -47,7 +56,7 @@ module.exports = {
 		data: new SlashCommandBuilder()
 			.setName('updateavatar')
 			.setDescription('Update the bot avatar'),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			if ((interaction.user.id !== '274847072753025025') || (interaction.user.id !== '937656707486736385')) {
 				await client.user.setUsername('.Spectre BOT');
 				await client.user.setAvatar('https://cdn.discordapp.com/attachments/1063081380243841115/1074466865067348038/4da70b1ec609e8bfd2cd248131cee8b1.png');
@@ -87,7 +96,7 @@ module.exports = {
 					.setName('mention')
 					.setRequired(false)
 					.setDescription('Mention a role')),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			wipe(interaction);
 		}
 	},
@@ -95,7 +104,7 @@ module.exports = {
 		data: new SlashCommandBuilder()
 			.setName('move')
 			.setDescription('Move all members to your channel'),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			move(interaction);
 		}
 	},
@@ -103,13 +112,13 @@ module.exports = {
 		data: new SlashCommandBuilder()
 			.setName('friend')
 			.setDescription('I will become ur friend <3'),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			friend(interaction);
 		}
 	},
 	giveaway: {
 		data: new SlashCommandBuilder()
-			.setName('giveaway')	
+			.setName('giveaway')
 			.setDescription('Create a giveaway')
 			.addChannelOption(option =>
 				option
@@ -127,7 +136,7 @@ module.exports = {
 					.setRequired(true)
 					.setDescription('The description of the giveaway'))
 			.addRoleOption(option =>
-				option	
+				option
 					.setName('mention')
 					.setRequired(true)
 					.setDescription('Mention a role'))
@@ -136,7 +145,7 @@ module.exports = {
 					.setName('creator')
 					.setRequired(true)
 					.setDescription('The creator of the giveaway')),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			giveaway(interaction);
 		}
 	},
@@ -149,7 +158,7 @@ module.exports = {
 					.setName('messageid')
 					.setRequired(true)
 					.setDescription('The message id of the giveaway')),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			winner(interaction);
 		}
 	},
@@ -162,7 +171,7 @@ module.exports = {
 					.setName('player')
 					.setRequired(true)
 					.setDescription('The player to teleport to')),
-		async execute(interaction, client) {
+		async execute(interaction, client, Commands) {
 			randomtp(interaction);
 		}
 	},

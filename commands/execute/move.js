@@ -37,7 +37,8 @@ async function move(interaction) {
     }
 
     const responseEmbed = new EmbedBuilder()
-        .setTitle('MOVE')
+        .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
+        .setTitle('Move')
         .setDescription(`Move ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)
         .setColor(0x0099FF);
 
