@@ -28,6 +28,13 @@ client.on('ready', async () => {
 
     let error = false;
 
+    // delete command "timer"
+    // const deleteList = await client.application.commands.fetch();
+    // const toDelete = deleteList.find(command => command.name === 'timer');
+    // if (toDelete) {
+    //     await toDelete.delete();
+    // }
+
     try {
         await client.user.setUsername('.Spectre BOT');
     }
@@ -100,6 +107,7 @@ client.on('interactionCreate', async interaction => {
         if (interaction.commandName === Command.data.name) {
             try {
                 await Command.execute(interaction, client, Commands);
+                return;
             }
             catch (error) {
                 console.log(error.message);

@@ -11,6 +11,7 @@ const { giveaway } = require('./execute/giveaway.js');
 const { winner } = require('./execute/winner.js');
 const { randomtp } = require('./execute/random.js');
 const { helpspectre } = require('./execute/helpspectre.js');
+const { timer } = require('./execute/timer.js');
 
 /**
  * @param {import('discord.js').CommandInteraction} interaction
@@ -185,4 +186,31 @@ module.exports = {
 		},
 		help: true,
 	},
+	timer: {
+		data: new SlashCommandBuilder()
+			.setName('timer')
+			.setDescription('Create a timer')
+			.addStringOption(option =>
+				option
+					.setName('name')
+					.setRequired(true)
+					.setDescription('The name of the timer'))
+			.addIntegerOption(option =>
+				option
+					.setName('time')
+					.setRequired(true)
+					.setDescription('The time of the timer in seconds (1 to 14400 (4 hours)'))
+			.addRoleOption(option =>
+				option
+					.setName('role')
+					.setDescription('Mention a role'))
+			.addUserOption(option =>
+				option
+					.setName('user')
+					.setDescription('Mention a user')),
+		async execute(interaction, client, Commands) {
+			timer(interaction);
+		},
+		help: true,
+	},					
 };
