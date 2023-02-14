@@ -16,14 +16,14 @@ async function helpspectre(interaction, Commands) {
         .setColor(0x0099FF);
 
     for (const command in Commands) {
+        if (!Commands[command].help) continue;
+
         const commandData = Commands[command].data;
         const commandName = commandData.name;
-
-        if (commandName === interaction.commandName) continue;
-
         const commandDescription = commandData.description;
         const commandOptions = commandData.options;
         const commandOptionsString = commandOptions.map(option => `**${option.name}** - ${option.description}`).join('\n');
+
         if (commandOptionsString)
             responseEmbed.addFields({ name: `**${commandName}** - ${commandDescription}`, value: `${commandOptionsString}`});
         else

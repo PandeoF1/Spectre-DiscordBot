@@ -24,7 +24,8 @@ module.exports = {
 			.setDescription('Display all commands for Spectre BOT (/help is for the rust bot)'),
 		async execute(interaction, client, Commands) {
 			helpspectre(interaction, Commands);
-		}
+		},
+		help: false,
 	},
 	dm: {
 		data: new SlashCommandBuilder()
@@ -42,7 +43,8 @@ module.exports = {
 					.setDescription('True if you don\'t want to send the message to all players who are in a voice channel.')),
 		async execute(interaction, client, Commands) {
 			dm(interaction);
-		}
+		},
+		help: true,
 	},
 	getSteamID: {
 		data: new SlashCommandBuilder()
@@ -50,7 +52,8 @@ module.exports = {
 			.setDescription('Get steam profile from steamID64 channel'),
 		async execute(interaction, client, Commands) {
 			getSteamID(interaction);
-		}
+		},
+		help: true,
 	},
 	updateAvatar: {
 		data: new SlashCommandBuilder()
@@ -65,7 +68,8 @@ module.exports = {
 			else {
 				interaction.reply({ content: 'You are not authorized to use this command.', ephemeral: true });
 			}
-		}
+		},
+		help: false,
 	},
 	wipe: {
 		data: new SlashCommandBuilder()
@@ -98,7 +102,8 @@ module.exports = {
 					.setDescription('Mention a role')),
 		async execute(interaction, client, Commands) {
 			wipe(interaction);
-		}
+		},
+		help: true,
 	},
 	move: {
 		data: new SlashCommandBuilder()
@@ -106,7 +111,8 @@ module.exports = {
 			.setDescription('Move all members to your channel'),
 		async execute(interaction, client, Commands) {
 			move(interaction);
-		}
+		},
+		help: true,
 	},
 	friend: {
 		data: new SlashCommandBuilder()
@@ -114,7 +120,8 @@ module.exports = {
 			.setDescription('I will become ur friend <3'),
 		async execute(interaction, client, Commands) {
 			friend(interaction);
-		}
+		},
+		help: true,
 	},
 	giveaway: {
 		data: new SlashCommandBuilder()
@@ -147,7 +154,8 @@ module.exports = {
 					.setDescription('The creator of the giveaway')),
 		async execute(interaction, client, Commands) {
 			giveaway(interaction);
-		}
+		},
+		help: true,
 	},
 	winner: {
 		data: new SlashCommandBuilder()
@@ -160,19 +168,21 @@ module.exports = {
 					.setDescription('The message id of the giveaway')),
 		async execute(interaction, client, Commands) {
 			winner(interaction);
-		}
+		},
+		help: true,
 	},
 	randomtp: {
 		data: new SlashCommandBuilder()
 			.setName('randomtp')
-			.setDescription('Teleport to a random player')
+			.setDescription('Teleport a player to a bunch of random channels')
 			.addUserOption(option =>
 				option
 					.setName('player')
 					.setRequired(true)
-					.setDescription('The player to teleport to')),
+					.setDescription('The player to teleport')),
 		async execute(interaction, client, Commands) {
 			randomtp(interaction);
-		}
+		},
+		help: true,
 	},
 };
