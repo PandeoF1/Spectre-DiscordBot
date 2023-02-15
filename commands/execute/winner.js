@@ -16,6 +16,8 @@ async function winner(interaction) {
     const messageid = interaction.options.getString('messageid');
     // Get all members from the reaction 🎉 from the message
     const message = await interaction.channel.messages.fetch(messageid)
+    // get thumnail from message
+    const thumbnail = message.embeds[0].thumbnail.url;
     const reaction = message.reactions.cache.get('🎉');
     const members = await reaction.users.fetch();
 
@@ -31,6 +33,8 @@ async function winner(interaction) {
         .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
         .setTitle('Winner')
         .setDescription(`Choosing the winner.. ${member}`)
+        .setThumbnail(thumbnail)
+        .setTimestamp()
         .setColor(0x0099FF);
 
     await interaction.reply({ content: 'Choosing the winner...', ephemeral: true });
@@ -38,8 +42,12 @@ async function winner(interaction) {
     
     // Change the winner 10 times every second
     for (let i = 0; i < 10; i++) {
+        let numberofdots = '.';
         const choosing = members.random();
-        messages.edit({ embeds: [responseEmbed.setDescription(`Choosing the winner.. ${choosing}`)]});
+        if (i % 2 === 0) numberofdots += '.';
+        else numberofdots += '..';
+        
+        messages.edit({ embeds: [responseEmbed.setDescription(`Choosing the winner${numberofdots} ${choosing}`)]});
     
         // Wait 1 second
         await new Promise(resolve => setTimeout(resolve, 1000));

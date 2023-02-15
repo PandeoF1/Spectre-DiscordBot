@@ -19,6 +19,7 @@ async function giveaway(interaction) {
     const channel = interaction.options.getChannel('channel');
     const role = interaction.options.getRole('mention');
     const creator = interaction.options.getUser('creator');
+    const thumbnail = interaction.options.getString('thumbnail');
 
     // Parse description for \n and replace with new line
     const descriptionArray = description.split('\\n');
@@ -30,7 +31,7 @@ async function giveaway(interaction) {
         .setDescription(descriptionString)
         .setColor(0x0099FF)
         .setAuthor({ name: creator.username, iconURL: creator.displayAvatarURL() })
-        .setThumbnail('https://cdn.discordapp.com/attachments/1063081380243841115/1074788149508718652/index.jpg')
+        .setThumbnail(thumbnail)
         .setTimestamp();
     
     // send the embed to the channel

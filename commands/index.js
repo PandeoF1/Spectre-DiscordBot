@@ -152,7 +152,12 @@ module.exports = {
 				option
 					.setName('creator')
 					.setRequired(true)
-					.setDescription('The creator of the giveaway')),
+					.setDescription('The creator of the giveaway'))
+			.addStringOption(option =>
+				option
+					.setName('thumbnail')
+					.setRequired(true)
+					.setDescription('The thumbnail of the giveaway')),
 		async execute(interaction, client, Commands) {
 			giveaway(interaction);
 		},
