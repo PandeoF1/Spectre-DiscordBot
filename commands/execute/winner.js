@@ -30,10 +30,27 @@ async function winner(interaction) {
     const responseEmbed = new EmbedBuilder()
         .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
         .setTitle('Winner')
-        .setDescription(`The winner is ${member}`)
+        .setDescription(`Choosing the winner.. ${member}`)
         .setColor(0x0099FF);
 
-    interaction.reply({ embeds: [responseEmbed]});
+    await interaction.reply({ content: 'Choosing the winner...', ephemeral: true });
+    const messages = await interaction.channel.send({ embeds: [responseEmbed]});
+    
+    // Change the winner 10 times every second
+    for (let i = 0; i < 10; i++) {
+        const choosing = members.random();
+        messages.edit({ embeds: [responseEmbed.setDescription(`Choosing the winner.. ${choosing}`)]});
+    
+        // Wait 1 second
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    // Send the winner
+    const choosing = members.random();
+    responseEmbed.setDescription(`The winner is ${choosing}`);
+    messages.edit({ embeds: [responseEmbed]});
+
+    await interaction.followUp({ content: `${choosing}` });
 };
 
 module.exports = { winner };
