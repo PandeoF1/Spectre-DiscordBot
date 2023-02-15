@@ -21,28 +21,40 @@ async function move(interaction) {
     // Get all members in all voice channels
     const voiceChannels = interaction.guild.channels.cache.filter(channel => channel.type === 2);
     const voiceChannelId = interaction.member.voice.channelId;
+
     for (const channel of voiceChannels.values()) {
         const members = channel.members;
-        // if same channel, skip
+
         if (channel.id === voiceChannelId) continue;
         for (const member of members.values()) {
             total++;
-            try {
-                await member.voice.setChannel(voiceChannelId);
-                count++;
-            } catch (error) {
-                console.log(`Failed to move ${member.user.tag}: ${error.message}`.red);
-            }
         }
     }
 
     const responseEmbed = new EmbedBuilder()
         .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
         .setTitle('Move')
-        .setDescription(`Move ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)
+        .setDescription(`Move ${count} members of ${total} members. (0%)`)
         .setColor(0x0099FF);
 
-    await interaction.channel.send({ embeds: [responseEmbed], ephemeral: true });
+    const message = await interaction.channel.send({ embeds: [responseEmbed], ephemeral: true });
+
+    for (const channel of voiceChannels.values()) {
+        const members = channel.members;
+        // if same channel, skip
+        if (channel.id === voiceChannelId) continue;
+        for (const member of members.values()) {
+            try {
+                await member.voice.setChannel(voiceChannelId);
+                count++;
+                if (count % 5 === 0)
+                    message.edit({ embeds: [responseEmbed.setDescription(`Move ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)] });
+            } catch (error) {
+                console.log(`Failed to move ${member.user.tag}: ${error.message}`.red);
+            }
+        }
+    }
+    message.edit({ embeds: [responseEmbed.setDescription(`Move ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)] });
 }
 
 module.exports = { move };

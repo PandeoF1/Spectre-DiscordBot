@@ -36,27 +36,36 @@ async function dm(interaction) {
 		.setColor(0x8B0000)
 		.setTimestamp();
 	await interaction.reply({ content: 'Sending DM to all members...', ephemeral: true });
+
 	for (const member of members.values()) {
 		if (member.roles.cache.has('956310830780137642')) {
 			total++;
-			try {
-				if (!blackList.includes(member.user.id)) await member.send({ embeds: [sentEmbed] });
-				//else console.log(`Skipping ${member.user.tag} because he is in a voice channel`);
-				count++;
-			} catch (error) {
-				console.log(`Failed to send DM to ${member.user.tag}: ${error}`);
-			}
-
 		}
 	}
 
 	const responseEmbed = new EmbedBuilder()
 		.setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
 		.setTitle('DM')
-		.setDescription(`Sent to ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)
+		.setDescription(`Sent to ${count} members of ${total} members. (0%)`)
 		.setColor(0x0099FF);
 
-	await interaction.channel.send({ embeds: [responseEmbed], ephemeral: true });
+	const message = await interaction.channel.send({ embeds: [responseEmbed] });
+
+	for (const member of members.values()) {
+		if (member.roles.cache.has('956310830780137642')) {
+			try {
+				if (!blackList.includes(member.user.id)) await member.send({ embeds: [sentEmbed] });
+
+				count++;
+				if (count % 10 === 0)
+					message.edit({ embeds: [responseEmbed.setDescription(`Sent to ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)] });
+			} catch (error) {
+				console.log(`Failed to send DM to ${member.user.tag}: ${error}`);
+			}
+
+		}
+	}
+	message.edit({ embeds: [responseEmbed.setDescription(`Sent to ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)] });
 }
 
 module.exports = { dm };
