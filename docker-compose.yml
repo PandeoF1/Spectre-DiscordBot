@@ -8,4 +8,5 @@ services:
             - SBOT_DISCORD_CLIENT_ID=111111111111111111
             - SBOT_DISCORD_TOKEN=xxxxx
             - SBOT_DISCORD_AUTHORISED_CLIENT_IDS=['1111', '11111']
+            - SBOT_DISCORD_ROLE_ID=111111111111111111
         restart: always

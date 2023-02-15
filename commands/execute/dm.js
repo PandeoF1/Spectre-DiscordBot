@@ -38,7 +38,7 @@ async function dm(interaction) {
 	await interaction.reply({ content: 'Sending DM to all members...', ephemeral: true });
 
 	for (const member of members.values()) {
-		if (member.roles.cache.has('956310830780137642')) {
+		if (member.roles.cache.has(Config.discord.roleId)) {
 			total++;
 		}
 	}
@@ -52,7 +52,7 @@ async function dm(interaction) {
 	const message = await interaction.channel.send({ embeds: [responseEmbed] });
 
 	for (const member of members.values()) {
-		if (member.roles.cache.has('956310830780137642')) {
+		if (member.roles.cache.has(Config.discord.roleId)) {
 			try {
 				if (!blackList.includes(member.user.id)) await member.send({ embeds: [sentEmbed] });
 

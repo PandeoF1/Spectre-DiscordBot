@@ -40,8 +40,8 @@ async function winner(interaction) {
     await interaction.reply({ content: 'Choosing the winner...', ephemeral: true });
     const messages = await interaction.channel.send({ embeds: [responseEmbed]});
     
-    // Change the winner 10 times every second
-    for (let i = 0; i < 10; i++) {
+    // Change the winner 15 times every second
+    for (let i = 0; i < 15; i++) {
         let numberofdots = '.';
         const choosing = members.random();
         if (i % 2 === 0) numberofdots += '.';
@@ -50,7 +50,7 @@ async function winner(interaction) {
         messages.edit({ embeds: [responseEmbed.setDescription(`Choosing the winner${numberofdots} ${choosing}`)]});
     
         // Wait 1 second
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 500));
     }
 
     // Send the winner
