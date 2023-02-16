@@ -27,6 +27,7 @@ async function move(interaction) {
 
         if (channel.id === voiceChannelId) continue;
         for (const member of members.values()) {
+            if (!member.roles.cache.has(Config.discord.roleId)) continue;
             total++;
         }
     }
