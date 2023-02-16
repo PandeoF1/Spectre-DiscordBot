@@ -23,8 +23,9 @@ async function wipe(interaction) {
 	// Create an embed
 	const responseEmbed = new EmbedBuilder()
 		.setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
-		.setTitle('Wipe')
-		.setDescription(`**Server Name:** ${serverName}\n**Server IP:** ${serverIP}\n**Date:** ${date}`)
+		.setTitle(serverName)
+		.addFields({name: 'IP', value: serverIP, inline: true}, {name: 'Date', value: date, inline: true})
+		.setTimestamp()
 		.setColor(0x0099FF);
 
 	// Clear all messages from the channel '1022260147126550598'
