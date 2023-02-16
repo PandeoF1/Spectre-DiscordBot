@@ -45,6 +45,8 @@ async function move(interaction) {
         if (channel.id === voiceChannelId) continue;
         for (const member of members.values()) {
             try {
+                // if player doesn't have role skip
+                if (!member.roles.cache.has(Config.discord.roleId)) continue;
                 await member.voice.setChannel(voiceChannelId);
                 count++;
                 if (count % 16 === 0)

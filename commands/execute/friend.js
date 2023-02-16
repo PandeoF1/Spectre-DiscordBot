@@ -28,12 +28,12 @@ async function friend(interaction) {
         }
 
         // Play a sound
-        const stream = await ytdl('https://www.youtube.com/watch?v=7cXkZ1-f4-I', { filter: 'audioonly' });
+        const stream = ytdl('https://www.youtube.com/watch?v=7cXkZ1-f4-I', { filter: 'audioonly' });
         const player = createAudioPlayer();
         const resource = createAudioResource(stream);
 
-        await player.play(resource);
-        const dispatcher = await connection.subscribe(player);
+        player.play(resource);
+        const dispatcher = connection.subscribe(player);
 
         if (dispatcher) {
             setTimeout(() => {
