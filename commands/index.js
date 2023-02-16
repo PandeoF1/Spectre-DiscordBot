@@ -17,7 +17,7 @@ const { send } = require('./execute/send.js');
 /**
  * @param {import('discord.js').CommandInteraction} interaction
  * @param {import('discord.js').Client} client
- */
+**/
 
 module.exports = {
 	helpspectre: {
