@@ -41,7 +41,7 @@ async function winner(interaction) {
     const messages = await interaction.channel.send({ embeds: [responseEmbed]});
     
     // Change the winner 15 times every second
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 5; i++) {
         let numberofdots = '.';
         const choosing = members.random();
         if (i % 2 === 0) numberofdots += '.';
