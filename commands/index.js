@@ -62,7 +62,7 @@ module.exports = {
 			.setName('updateavatar')
 			.setDescription('Update the bot avatar'),
 		async execute(interaction, client, Commands) {
-			if ((interaction.user.id !== '274847072753025025') || (interaction.user.id !== '937656707486736385')) {
+			if (Config.discord.owners.includes(interaction.user.id)) {
 				await client.user.setUsername('.Spectre BOT');
 				await client.user.setAvatar('https://cdn.discordapp.com/attachments/1063081380243841115/1074466865067348038/4da70b1ec609e8bfd2cd248131cee8b1.png');
 				interaction.reply({ content: 'Avatar updated', ephemeral: true });

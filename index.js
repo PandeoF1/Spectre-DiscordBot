@@ -98,7 +98,7 @@ client.on('ready', async () => {
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
-    if (interaction.guildId !== '937665835076575313') {
+    if (interaction.guildId !== Config.discord.guildId) {
         interaction.reply({ content: 'This command can only be used in the Spectre Discord server.', ephemeral: true });
         return;
     }
@@ -121,17 +121,16 @@ client.on('messageCreate', async message => {
     if (message.partial) return;
     if (message.author.bot) return;
     if (message.channel.type === 1) {
-        const channel = client.channels.cache.get('1074654133925199902');
+        const channel = client.channels.cache.get(Config.discord.logChannelId);
         channel.send({ content: `${message.author.tag}: ${message.content}` });
         if (message.attachments.size > 0) {
             channel.send({ content: `${message.attachments.first().url}` });
         }
     }
     else if (message.channel.type === 0) {
-        // if the message if the reply of a bot and come from 1074654133925199902 send the message in dm to the user who have been replied
-        if (message.reference && message.reference.messageId && message.reference.channelId === '1074654133925199902') {
+        if (message.reference && message.reference.messageId && message.reference.channelId === Config.discord.logChannelId) {
             // Get the discord tag in the message reference and send the message to the user
-            const messageReference = await client.channels.cache.get('1074654133925199902').messages.fetch(message.reference.messageId);
+            const messageReference = await client.channels.cache.get(Config.discord.logChannelId).messages.fetch(message.reference.messageId);
             const discordTag = messageReference.content.split(':')[0];
             if (discordTag)
             {

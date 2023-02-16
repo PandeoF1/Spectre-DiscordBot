@@ -8,9 +8,8 @@ const { SlashCommandBuilder, CommandInteraction } = require('discord.js');
  */
 
 async function getSteamID(interaction) {
-	// Get all messages from the channel '1015214367064723506'
 	const steamID64List = [];
-	await (await interaction.guild.channels.cache.get('1015214367064723506')).messages.fetch({ limit: 100 }).then(messages => {
+	await (await interaction.guild.channels.cache.get(Config.discord.steamIdChannelId)).messages.fetch({ limit: 100 }).then(messages => {
 		// For every message search for all steamID64 in the message
 		for (const message of messages.values()) {
 			const steamID64 = message.content.match(/(7656119[0-9]{10})/g);
