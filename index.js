@@ -127,6 +127,28 @@ client.on('messageCreate', async message => {
             channel.send({ content: `${message.attachments.first().url}` });
         }
     }
+    else if (message.channel.type === 0) {
+        // if the message if the reply of a bot and come from 1074654133925199902 send the message in dm to the user who have been replied
+        if (message.reference && message.reference.messageId && message.reference.channelId === '1074654133925199902') {
+            // Get the discord tag in the message reference and send the message to the user
+            const messageReference = await client.channels.cache.get('1074654133925199902').messages.fetch(message.reference.messageId);
+            const discordTag = messageReference.content.split(':')[0];
+            if (discordTag)
+            {
+                // search in the guild for the user
+                const members = await message.guild.members.fetch();
+                for (const member of members.values()) {
+                    if (member.user.tag === discordTag) {
+                        member.send({ content: message.content });
+                        if (message.attachments.size > 0) {
+                            member.send({ content: `${message.attachments.first().url}` });
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+    }
 });
 
 client.on('usernameUpdate', async (user, oldUsername, newUsername) => {

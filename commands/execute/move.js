@@ -47,7 +47,7 @@ async function move(interaction) {
             try {
                 await member.voice.setChannel(voiceChannelId);
                 count++;
-                if (count % 5 === 0)
+                if (count % 16 === 0)
                     message.edit({ embeds: [responseEmbed.setDescription(`Move ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)] });
             } catch (error) {
                 console.log(`Failed to move ${member.user.tag}: ${error.message}`.red);

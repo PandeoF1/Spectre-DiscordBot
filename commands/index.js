@@ -12,6 +12,7 @@ const { winner } = require('./execute/winner.js');
 const { randomtp } = require('./execute/random.js');
 const { helpspectre } = require('./execute/helpspectre.js');
 const { timer } = require('./execute/timer.js');
+const { send } = require('./execute/send.js');
 
 /**
  * @param {import('discord.js').CommandInteraction} interaction
@@ -217,5 +218,24 @@ module.exports = {
 			timer(interaction);
 		},
 		help: true,
-	},					
+	},				
+	send: {
+		data: new SlashCommandBuilder()
+			.setName('send')
+			.setDescription('Send a message to a user')
+			.addUserOption(option =>
+				option
+					.setName('user')
+					.setRequired(true)
+					.setDescription('The user to send the message to'))
+			.addStringOption(option =>
+				option
+					.setName('message')
+					.setRequired(true)
+					.setDescription('The message to send')),
+		async execute(interaction, client, Commands) {
+			send(interaction);
+		},
+		help: true,
+	},
 };

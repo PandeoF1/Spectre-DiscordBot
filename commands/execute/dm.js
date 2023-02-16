@@ -57,7 +57,7 @@ async function dm(interaction) {
 				if (!blackList.includes(member.user.id)) await member.send({ embeds: [sentEmbed] });
 
 				count++;
-				if (count % 10 === 0)
+				if (count % 24 === 0)
 					message.edit({ embeds: [responseEmbed.setDescription(`Sent to ${count} members of ${total} members. (${Math.round(count / total * 100)}%)`)] });
 			} catch (error) {
 				console.log(`Failed to send DM to ${member.user.tag}: ${error}`);
