@@ -242,7 +242,7 @@ module.exports = {
 	whoismissing: {
 		data: new SlashCommandBuilder()
 			.setName('whoismissing')
-			.setDescription('Who is missing from the server?'),
+			.setDescription('Who is missing on the voice channel ?'),
 		async execute(interaction, client, Commands) {
 			whoismissing(interaction);
 		},
