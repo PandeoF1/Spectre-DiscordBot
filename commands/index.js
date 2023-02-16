@@ -13,6 +13,7 @@ const { randomtp } = require('./execute/random.js');
 const { helpspectre } = require('./execute/helpspectre.js');
 const { timer } = require('./execute/timer.js');
 const { send } = require('./execute/send.js');
+const { whoismissing } = require('./execute/whoismissing.js');
 
 /**
  * @param {import('discord.js').CommandInteraction} interaction
@@ -235,6 +236,15 @@ module.exports = {
 					.setDescription('The message to send')),
 		async execute(interaction, client, Commands) {
 			send(interaction);
+		},
+		help: true,
+	},
+	whoismissing: {
+		data: new SlashCommandBuilder()
+			.setName('whoismissing')
+			.setDescription('Who is missing from the server?'),
+		async execute(interaction, client, Commands) {
+			whoismissing(interaction);
 		},
 		help: true,
 	},
