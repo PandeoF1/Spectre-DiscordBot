@@ -36,7 +36,7 @@ client.on('ready', async () => {
     // }
 
     try {
-        await client.user.setUsername('.Spectre BOT');
+        await client.user.setUsername(Config.discord.username);
     }
     catch (e) {
         error = true;
@@ -151,9 +151,9 @@ client.on('messageCreate', async message => {
 });
 
 client.on('usernameUpdate', async (user, oldUsername, newUsername) => {
-    if (newUsername !== '.Spectre BOT') {
-        await client.user.setUsername('.Spectre BOT');
-        await client.user.setAvatar('https://cdn.discordapp.com/attachments/1063081380243841115/1074466865067348038/4da70b1ec609e8bfd2cd248131cee8b1.png');
+    if (newUsername !== Config.discord.username) {
+        await client.user.setUsername(Config.discord.username);
+        await client.user.setAvatar(Config.discord.logo);
     }
 });
 
