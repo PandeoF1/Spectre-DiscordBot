@@ -11,5 +11,7 @@ module.exports = {
         logChannelId: process.env.SBOT_DISCORD_LOG_CHANNEL_ID || '',
         guildId: process.env.SBOT_DISCORD_GUILD_ID || '',
         steamIdChannelId: process.env.SBOT_DISCORD_STEAM_ID_CHANNEL_ID || '',
+        annonceChannelId: process.env.SBOT_ANNONCE_CHANNEL_ID || '',
+        
     }
 };
