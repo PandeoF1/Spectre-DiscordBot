@@ -1,3 +1,4 @@
+
 const Config = require('../../config/index.js');
 const { EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder, CommandInteraction } = require('discord.js');
@@ -11,7 +12,7 @@ async function helpspectre(interaction, Commands) {
     // Display all commands in a embed with a description and all options
     const responseEmbed = new EmbedBuilder()
         .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
-        .setTitle('Spectre Bot Help')
+        .setTitle(Config.discord.username)
         .setThumbnail(Config.discord.logo)
         .setColor(0x0099FF);
 
